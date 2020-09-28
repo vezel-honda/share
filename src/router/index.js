@@ -11,27 +11,30 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Login',
-    component: Login
+    path: "/",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: "/home",
+    name: "Home",
     component: Home,
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/profile',
-    name: 'Profile',
+    path: "/profile",
+    name: "Profile",
     component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
