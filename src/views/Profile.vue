@@ -35,10 +35,28 @@ export default {
       profile: this.$store.state.user.profile,
     };
   },
+  methods: {
+    edit() {
+      if (!this.active) {
+        axios
+          .put("https://infinite-shelf-65904.herokuapp.com/api/user", {
+            email: this.$store.state.user.email,
+            profile: this.profile,
+          })
+          .then((response) => {
+            this.$store.dispatch("changeUserData", {
+              profile: this.profile,
+            });
+            console.log(response);
+          });
+      }
+      this.active = !this.active;
+    },
+  },
   components: {
     SideNavi,
     Message
-  }
+  },
 };
 
 </script>
@@ -85,5 +103,8 @@ button {
   border-radius: 25px;
   display: block;
   margin: 0 0 0 auto;
+}
+input {
+  color: black;
 }
 </style>

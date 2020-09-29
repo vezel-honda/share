@@ -22,6 +22,9 @@ export default new Vuex.Store({
     logout(state, payload) {
       state.auth = payload;    
     },
+    changeUserData(state, payload) {
+      state.user.profile = payload;
+    },
   },
   actions: {
     async login({ commit }, { email, password }) {
@@ -57,6 +60,9 @@ export default new Vuex.Store({
         .catch((error) => {
           console.log(error);
         });
+    },
+    changeUserData({ commit }, { profile }) {
+      commit("changeUserData", profile);
     },
   },
 });
