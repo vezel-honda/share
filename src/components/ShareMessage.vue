@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
         axios
           .post("https://infinite-shelf-65904.herokuapp.com/api/shares", {
             user_id: this.$store.state.user.id,
-            share: this,share,
+            share: this.share,
           })
           .then((response) => {
             console.log(response);
