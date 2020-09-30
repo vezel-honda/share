@@ -16,12 +16,54 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      shares: [{name: "太郎", like: [], share: "初めまして" }]
+      shares: [],
+      path: true,
+      profile: true,
     };
-  }
+  },
+  methods: {
+    async getShares() {
+      let data = [];
+      let shares = await axios.get(
+        "https://infinite-shelf-65904.herokuapp.com/api/shares"
+      );
+      for (let i = 0; i < shares.data.data.length; i++) {
+        await axios
+          .get(
+            "https://infinite-shelf-65904.herokuapp.com/api/shares" + 
+              shares.data.data[i].id
+          )
+          .then((response) => {
+            if (this.$route.name == "profile") {
+              if (response.data.item.user_id == this.$store.state.user.id) {
+                data.push(response.data);
+              }
+            } else if (this.$route.name == "detail") {
+              if (response.data.item.id == this.id) {
+                data.push(response.data);
+              }
+            } else {
+              data.push(response.data);
+            }
+          });
+      }
+      this.shares = data;
+      console.log(this.shares);
+    },
+  },
+  created() {
+    if (this.$route.name === "home") {
+      this.path = false;
+    }
+    if (this.$route.name === "detail") {
+      this.profile = false;
+    }
+    this.getShares();
+  },
 };
 
 </script>
