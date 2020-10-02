@@ -3,9 +3,9 @@
   <div v-for="(value, key, index) in shares" :key="index">
       <div class="message">
           <div class="flex">
-            <p>{{value.name}}</P>
-            <img class="icon" src="../assets/heart.png" />
-            <p>{{value.like}}</p>
+            <p class="name">{{value.name}}</P>
+            <img class="icon" src="../assets/heart.png" @click="fav(key)" alt />
+            <p class="number">{{value.like.length}}</p>
             <img class="icon" src="../assets/cross.png" />
             <img class="icon detail" src="../assets/detail.png" />
           </div>
@@ -18,6 +18,7 @@
 <script>
 import axios from "axios";
 export default {
+  props: ["id"],
   data() {
     return {
       shares: [],
@@ -26,6 +27,45 @@ export default {
     };
   },
   methods: {
+    fav(index) {
+      let result = this.shares[index].like.some((value) => {
+        return value.user_id == this.$store.state.user.id;
+      });
+      if (result) {
+        this.shares[index].like.forEach((element) => {
+          if (element.user_id == this.$store.state.user.id) {
+            axios({
+              method: "delete",
+              url: "https://infinite-shelf-65904.herokuapp.com/api/like",
+              data: {
+                share_id: this.shares[index].item.id,
+                user_id: this.$store.state.user.id,
+              },
+            })
+            .then((response) => {
+              console.log(response);
+              this.$router.go({
+                path: this.$router.currentRoute.path,
+                force: true,
+              });
+            });
+          }
+        });
+      } else {
+        axios
+          .post("https://infinite-shelf-65904.herokuapp.com/api/like", {
+            share_id: this.shares[index].item.id,
+            user_id: this.$store.state.user.id,
+          })
+          .then((response) => {
+            console.log(response);
+            this.$router.go({
+              path: this.$router.currentRoute.path,
+              force: true,
+            });
+          });
+      }
+    },
     async getShares() {
       let data = [];
       let shares = await axios.get(
