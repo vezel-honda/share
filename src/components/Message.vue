@@ -9,7 +9,7 @@
             <img class="icon" src="../assets/cross.png" />
             <img class="icon detail" src="../assets/detail.png" />
           </div>
-          <p class="text">{{value.share}}</p>
+          <p class="text">{{value.item.share}}</p>
       </div>
   </div>    
 </div>        
@@ -113,27 +113,27 @@ export default {
   display: flex;
 }
 .icon {
- width: 25px;
- height: 25px;
+  width: 25px;
+  height: 25px;
 }
 .detail {
- margin-left: 50px;
+  margin-left: 50px;
 }
 .message {
- padding: 20px;
- border-bottom: solid 1px white;
- border-left: solid 1px white;
+  padding: 20px;
+  border-bottom: solid 1px white;
+  border-left: solid 1px white;
 }
 .name {
- font-size: 18px;
- font-weight: bold;
- margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 .text {
- margin-top: 10px;
+  margin-top: 10px;
 }
 .number {
- margin-left: 10px;
- margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>
