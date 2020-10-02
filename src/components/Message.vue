@@ -6,8 +6,23 @@
             <p class="name">{{value.name}}</P>
             <img class="icon" src="../assets/heart.png" @click="fav(key)" alt />
             <p class="number">{{value.like.length}}</p>
-            <img class="icon" src="../assets/cross.png" />
-            <img class="icon detail" src="../assets/detail.png" />
+            <img
+              class="icon" 
+              src="../assets/cross.png" 
+              @click="del(key)" 
+              alt 
+              v-if="path && profile"
+            />
+            <img 
+              class="icon detail" 
+              src="../assets/detail.png" 
+              @click="$router.push({
+                path: '/detail/' + value.item.id,
+                params: {id: value.item.id},
+              })" 
+              alt
+              v-if="profile"
+              />
           </div>
           <p class="text">{{value.item.share}}</p>
       </div>
@@ -65,6 +80,20 @@ export default {
             });
           });
       }
+    },
+    del(index) {
+      axios
+        .delete(
+          "https://infinite-shelf-65904.herokuapp.com/api/shares" + 
+            this.shares[index].item.id
+        )
+        .then((response) => {
+          console.log(response);
+          this.$router.go({
+            path: this.$router.currentRoute.path,
+            force: true,
+          });
+        });
     },
     async getShares() {
       let data = [];
