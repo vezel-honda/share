@@ -61,7 +61,7 @@ export default {
     },
     comment() {
       axios
-        .get("https://infinite-shelf-65904.herokuapp.com/api/shares" + this.id)
+        .get("https://infinite-shelf-65904.herokuapp.com/api/shares/" + this.id)
         .then((response) => {
           this.data = response.data.comment;
         });
