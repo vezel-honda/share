@@ -53,7 +53,7 @@ export default {
           if (element.user_id == this.$store.state.user.id) {
             axios({
               method: "delete",
-              url: "herokuのURL/api/like",
+              url: "https://infinite-shelf-65904.herokuapp.com/api/like",
               data: {
                 share_id: this.shares[index].item.id,
                 user_id: this.$store.state.user.id,
@@ -69,7 +69,7 @@ export default {
         });
       } else {
         axios
-          .post("herokuのURL/api/like", {
+          .post("https://infinite-shelf-65904.herokuapp.com/api/like", {
             share_id: this.shares[index].item.id,
             user_id: this.$store.state.user.id,
           })
@@ -85,7 +85,7 @@ export default {
     del(index) {
       axios
         .delete(
-          "herokuのURL/api/shares/" +
+          "https://infinite-shelf-65904.herokuapp.com/api/shares/" +
             this.shares[index].item.id
         )
         .then((response) => {
@@ -99,12 +99,12 @@ export default {
     async getShares() {
       let data = [];
       let shares = await axios.get(
-        "herokuのURL/api/shares"
+        "https://infinite-shelf-65904.herokuapp.com/api/shares"
       );
       for (let i = 0; i < shares.data.data.length; i++) {
         await axios
           .get(
-            "herokuのURL/api/shares/" +
+            "https://infinite-shelf-65904.herokuapp.com/api/shares/" +
               shares.data.data[i].id
           )
           .then((response) => {
