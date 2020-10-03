@@ -85,7 +85,7 @@ export default {
       axios
         .delete(
           "https://infinite-shelf-65904.herokuapp.com/api/shares" + 
-            this.shares[index].item.id
+          this.shares[index].item.id
         )
         .then((response) => {
           console.log(response);
@@ -104,7 +104,7 @@ export default {
         await axios
           .get(
             "https://infinite-shelf-65904.herokuapp.com/api/shares" + 
-              shares.data.data[i].id
+            shares.data.data[i].id
           )
           .then((response) => {
             if (this.$route.name == "profile") {
