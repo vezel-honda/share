@@ -1,11 +1,10 @@
 <template>
   <div class="flex">
     <div class="left">
-     <SideNavi />
+      <SideNavi />
     </div>
-
     <div class="right">
-      <div class="title"> 
+      <div class="title">
         <p>ホーム</p>
       </div>
       <Message />
@@ -22,7 +21,6 @@ export default {
     Message
   }
 };
-
 </script>
 
 <style scoped>
@@ -46,5 +44,4 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
-
 </style>
