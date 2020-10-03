@@ -98,14 +98,14 @@ export default {
     },
     async getShares() {
       let data = [];
-      let shares = await axios.get(
+      let share = await axios.get(
         "https://infinite-shelf-65904.herokuapp.com/api/shares"
       );
-      for (let i = 0; i < shares.data.length; i++) {
+      for (let i = 0; i < share.data.data.length; i++) {
         await axios
           .get(
             "https://infinite-shelf-65904.herokuapp.com/api/shares/" +
-              shares.data[i].id
+              share.data.data[i].id
           )
           .then((response) => {
             if (this.$route.name == "profile") {
