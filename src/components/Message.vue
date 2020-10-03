@@ -104,7 +104,7 @@ export default {
       for (let i = 0; i < shares.data.data.length; i++) {
         await axios
           .get(
-            "https://infinite-shelf-65904.herokuapp.com/api/shares" + 
+            "https://infinite-shelf-65904.herokuapp.com/api/shares/" + 
             shares.data.data[i].id
           )
           .then((response) => {
