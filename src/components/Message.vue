@@ -1,32 +1,32 @@
 <template>
   <div>
-    <div v-for="(value,key,index) in shares" :key="index">
+    <div v-for="(value, key, index) in shares" :key="index">
       <div class="message">
         <div class="flex">
-          <p class="name">{{value.name}}</p>
+          <p class="name">{{ value.name }}</p>
           <img class="icon" src="../assets/heart.png" @click="fav(key)" alt />
-          <p class="number">{{ value.like }}</p>
-          <img 
-            class="icon" 
-            src="../assets/cross.png" 
-            @click="del(key)" 
-            alt 
+          <p class="number">{{ value.like.length }}</p>
+          <img
+            class="icon"
+            src="../assets/cross.png"
+            @click="del(key)"
+            alt
             v-if="path && profile"
-            />
-          <img 
-            class="icon detail" 
-            src="../assets/detail.png" 
+          />
+          <img
+            class="icon detail"
+            src="../assets/detail.png"
             @click="
               $router.push({
                 path: '/detail/' + value.item.id,
-                param: {id: value.item.id},
+                params: { id: value.item.id },
               })
-            " 
-            alt 
+            "
+            alt
             v-if="profile"
-            />
+          />
         </div>
-        <p class="text">{{value.item.share}}</p>
+        <p class="text">{{ value.item.share }}</p>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
           if (element.user_id == this.$store.state.user.id) {
             axios({
               method: "delete",
-              url: "https://infinite-shelf-65904.herokuapp.com/api/like",
+              url: "herokuのURL/api/like",
               data: {
                 share_id: this.shares[index].item.id,
                 user_id: this.$store.state.user.id,
@@ -65,11 +65,11 @@ export default {
                 force: true,
               });
             });
-          }  
+          }
         });
       } else {
         axios
-          .post("https://infinite-shelf-65904.herokuapp.com/api/like", {
+          .post("herokuのURL/api/like", {
             share_id: this.shares[index].item.id,
             user_id: this.$store.state.user.id,
           })
@@ -85,8 +85,8 @@ export default {
     del(index) {
       axios
         .delete(
-          "https://infinite-shelf-65904.herokuapp.com/api/shares/" + 
-          this.shares[index].item.id
+          "herokuのURL/api/shares/" +
+            this.shares[index].item.id
         )
         .then((response) => {
           console.log(response);
@@ -99,16 +99,16 @@ export default {
     async getShares() {
       let data = [];
       let shares = await axios.get(
-        "https://infinite-shelf-65904.herokuapp.com/api/shares"
+        "herokuのURL/api/shares"
       );
       for (let i = 0; i < shares.data.data.length; i++) {
         await axios
           .get(
-            "https://infinite-shelf-65904.herokuapp.com/api/shares/" + 
-            shares.data.data[i].id
+            "herokuのURL/api/shares/" +
+              shares.data.data[i].id
           )
           .then((response) => {
-            if (this.$router.name == "profile") {
+            if (this.$route.name == "profile") {
               if (response.data.item.user_id == this.$store.state.user.id) {
                 data.push(response.data);
               }
