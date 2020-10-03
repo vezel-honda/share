@@ -46,7 +46,7 @@ export default {
   methods: {
     fav(index) {
       let result = this.shares[index].like.some((value) => {
-        return value.user_id == this.$store.state.user.id;
+        return value.user_id = this.$store.state.user.id;
       });
       if (result) {
         this.shares[index].like.forEach((element) => {
